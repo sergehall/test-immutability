@@ -1,8 +1,8 @@
 import {UserType} from "./types";
-import {cutHair} from "./some-functions";
+import {changeAddress, cutHair} from "./some-functions";
 
 test('cutting hair', () => {
-  let user: UserType = {
+  const user: UserType = {
     name: "John",
     age: 20,
     hairLength: 60,
@@ -19,4 +19,26 @@ test('cutting hair', () => {
   expect(user.hobbies).toEqual(["running", "swimming"]);
   expect(newUser.hairLength).toBe(30);
   expect(newUser).not.toEqual(user);
+});
+
+test('change address', () => {
+  const user: UserType = {
+    name: "John",
+    age: 20,
+    hairLength: 60,
+    address: {
+      city: "New York",
+      street: "Wall Street"
+    },
+    hobbies: ["running", "swimming"]
+  };
+
+  const newAddress = changeAddress(user, "Los Angeles", "405 Freeway");
+
+  expect(user.address.street).toBe("Wall Street");
+  expect(newAddress.address).toEqual({
+    city: "Los Angeles",
+    street: "405 Freeway"
+  });
+  expect(newAddress).not.toEqual(user);
 });
